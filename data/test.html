@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>CO2 Scale</title>
+		<script>
+			function poll() {
+				fetch(new Request('/x/stats'))
+					.then(response => response.json())
+					.then(data => {
+						document.getElementById('reading').innerText = data.weight.toLocaleString(undefined, { maximumFractionDigits: 2 }) + 'lbs';
+					});
+			}
+
+			setInterval(poll, 5000);
+			poll();
+		</script>
+	</head>
+	<body>
+		<h2>CO<sub>2</sub> Scale</h2>
+		<div>Current reading: <span id="reading">loading...</span></div>
+	</body>
+</html>
